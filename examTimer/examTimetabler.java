@@ -15,7 +15,6 @@ public class examTimetabler {
 		Date examDate = exam.getDate();
 		Date timeNow = new Date();
 		long differenceInTime = examDate.getTime() - timeNow.getTime();
-		System.out.println(examDate.toGMTString() + " " + timeNow.toGMTString());
 		long differenceMins = differenceInTime/60000;
 		if (differenceMins > Integer.MAX_VALUE) return Integer.MAX_VALUE;
 		else if (differenceMins < Integer.MIN_VALUE) return Integer.MIN_VALUE;
