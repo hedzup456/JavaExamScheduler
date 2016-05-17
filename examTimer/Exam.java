@@ -75,6 +75,18 @@ public class Exam {
 		return formatter.format(date);
 	}
 	/**
+	 * @return subject,location,datetime
+	 */
+	public String toString(){
+		StringBuilder toReturn = new StringBuilder();
+		toReturn.append(subject);
+		toReturn.append(',');
+		toReturn.append(location);
+		toReturn.append(date.toString());
+		
+		return toReturn.toString();
+	}
+	/**
 	 * 
 	 * @param subject	the subject of the exam
 	 * @param location	the location of the exam
@@ -85,6 +97,12 @@ public class Exam {
 		setLocation(location);
 		setSubject(subject);
 	}
+	/**
+	 * 
+	 * @param subject	the subject of the exam
+	 * @param location	the location of the exam
+	 * @param datetime	the date/time of the exam
+	 */
 	public Exam(String subject, String location, String datetime){
 		setDate(datetime);
 		setLocation(location);
