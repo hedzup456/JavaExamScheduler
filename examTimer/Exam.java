@@ -34,7 +34,7 @@ public class Exam {
 	 * @param date the date to set in dd/MM/yyyy HH:mm format
 	 */
 	public void setDate(String date){
-		DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy HH:mm");
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		try{
 			this.date = formatter.parse(date);
 		} catch (ParseException e) {
