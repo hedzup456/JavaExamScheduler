@@ -17,7 +17,23 @@ public class Exam {
 	private Date date;
 	private String location;
 	private String subject;
-	
+	private long timeTilExam;
+
+	public void updateTimeTilExam(){
+		Date now = new Date();
+		long timeDifference = date.getTime() - now.getTime();
+		timeTilExam = timeDifference;		
+	}
+	/**
+	 * @return the time until the exam
+	 */
+	public long getTimeTilExam(){
+		return timeTilExam;
+	}
+	public long getTimeTilExamMins(){
+		long millis = getTimeTilExam();
+		return millis/60000;
+	}
 	/**
 	 * @return the date
 	 */
@@ -108,5 +124,4 @@ public class Exam {
 		setLocation(location);
 		setSubject(subject);
 	}
-
 }
