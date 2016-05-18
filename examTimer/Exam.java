@@ -28,6 +28,7 @@ public class Exam {
 	 * @return the time until the exam
 	 */
 	public long getTimeTilExam(){
+		updateTimeTilExam();
 		return timeTilExam;
 	}
 	public long getTimeTilExamMins(){
