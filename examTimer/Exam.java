@@ -13,7 +13,17 @@ import java.util.Date;
  * @since 		17 May 2016
  *
  */
-public class Exam {
+public class Exam implements Comparable<Exam>{
+	@Override
+	public int compareTo(Exam other){
+		int comparedResult = 0;
+		if (other.getDate().getTime() > this.getDate().getTime()){	// If other is further in the future
+			comparedResult = -1;									// This is nearer
+		} else if (other.getDate().getTime() < this.getDate().getTime()){	// If this is further in the future
+			comparedResult = 1;									// other is nearer
+		}
+		return comparedResult;
+	}
 	private Date date;
 	private String location;
 	private String subject;
@@ -124,5 +134,8 @@ public class Exam {
 		setDate(datetime);
 		setLocation(location);
 		setSubject(subject);
+	}
+	public static void main(String[] a){	// for testing
+		Exam exam = new Exam("Computing 1", "The Internet", "25/12/2016 09:00");	// What a miserable time for an exam
 	}
 }
