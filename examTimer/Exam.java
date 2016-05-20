@@ -3,6 +3,9 @@
  */
 package examTimer;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -178,7 +181,7 @@ public class Exam implements Comparable<Exam>{
 		toReturn.append(',');
 		toReturn.append(level);
 		toReturn.append(',');
-		toReturn.append(date.toString());
+		toReturn.append(date.getTime());
 		
 		return toReturn.toString();
 	}
@@ -246,5 +249,13 @@ public class Exam implements Comparable<Exam>{
 		for(Exam examLooped: exams){
 			System.out.println(examLooped.getSubject() + " " + examLooped.getLevelAsString());
 		}
+		
+		try{
+			BufferedWriter writer = new BufferedWriter( new FileWriter( "exams.txt"));
+			for (Exam examL: exams) writer.write(examL.toString() + "\n");
+			writer.close();
+		} catch ( IOException e){
+			e.printStackTrace();
+		}		
 	}
 }

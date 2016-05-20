@@ -59,9 +59,9 @@ public class ExamParser {
 			return examFromLine;
 		} catch ( IOException e){
 			e.printStackTrace();
-			return new Exam("ERROR", "", 0, "");
+			return new Exam("ERROR", "ERROR", 0, "01/01/1970 00:00");
 		} catch ( NullPointerException e){
-			return new Exam("Error", "", 0, "");
+			return new Exam("Error", "ERROR", 0, "01/01/1970 00:00");
 		}
 	}
 	public void close(){
@@ -90,9 +90,9 @@ public class ExamParser {
 	public static void main( String[] a){
 		ExamParser examParser = new ExamParser("exams.txt");
 		List<Exam> examList= examParser.readAllExams();
-		
+
 		for( Exam exam: examList){
-			System.out.println(exam.getSubject());
+			System.out.println(exam.getSubject() + " " + exam.getDate());
 		}
 	}
 }
