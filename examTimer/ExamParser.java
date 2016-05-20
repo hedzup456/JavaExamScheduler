@@ -85,14 +85,4 @@ public class ExamParser {
 		}
 		return allExams;
 	}
-	
-	//	TESTING
-	public static void main( String[] a){
-		ExamParser examParser = new ExamParser("exams.txt");
-		List<Exam> examList= examParser.readAllExams();
-
-		for( Exam exam: examList){
-			System.out.println(exam.getSubject() + " " + exam.getDate());
-		}
-	}
 }
