@@ -6,10 +6,7 @@ package examTimer;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author 		Richard Henry (richardhenry602@gmail.com)
@@ -178,7 +175,7 @@ public class Exam implements Comparable<Exam>{
 		toReturn.append(',');
 		toReturn.append(level);
 		toReturn.append(',');
-		toReturn.append(date.toString());
+		toReturn.append(date.getTime());
 		
 		return toReturn.toString();
 	}
@@ -235,16 +232,5 @@ public class Exam implements Comparable<Exam>{
 		setLocation(location);
 		setLevel(level);
 		setSubject(subject);
-	}
-	
-	public static void main(String[] a){	// for testing
-		Exam exam = new Exam("Computing 1", "The Internet", "AS", "25/12/2016 09:00");	// What a miserable time for an exam
-		List<Exam> exams = new ArrayList<Exam>();
-		exams.add(exam);
-		exams.add(new Exam("Computing 2", "The Internet", "AS", "25/12/2016 09:00"));
-		Collections.sort(exams);
-		for(Exam examLooped: exams){
-			System.out.println(examLooped.getSubject() + " " + examLooped.getLevelAsString());
-		}
 	}
 }
