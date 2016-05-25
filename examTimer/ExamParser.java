@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 /**
  * @author 		Richard Henry (richardhenry602@gmail.com)
@@ -51,18 +53,26 @@ public class ExamParser {
 	 * @return One exam, that is on the one line in the file
 	 */
 	public Exam readExam(){
-		try{
-			String line = fileReader.readLine();
-			String[] lineInParts = line.split(",");
+		String line;
+		String[] lineInParts = {"ERROR", "ERROR", "0", "0"};
+		try {
+			line = fileReader.readLine();
+			lineInParts = line.split(",");
 			long date = Long.parseLong(lineInParts[3]);
 			Exam examFromLine = new Exam(lineInParts[0], lineInParts[1], Integer.parseInt(lineInParts[2]), new Date(date));
 			return examFromLine;
-		} catch ( IOException e){
+		} catch ( NumberFormatException e){
+			try {
+				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyy HH:mm");
+				return new Exam(lineInParts[0], lineInParts[1], Integer.parseInt(lineInParts[2]), df.parse(lineInParts[3]));
+			} catch ( ParseException ee) {}
+	        } catch ( IOException e){
 			e.printStackTrace();
 			return new Exam("ERROR", "ERROR", 0, "01/01/1970 00:00");
 		} catch ( NullPointerException e){
 			return new Exam("Error", "ERROR", 0, "01/01/1970 00:00");
 		}
+		return new Exam("ERROR", "ERROR", 0, "01/01/1970 00:00"); // Apparently this is needed, who knew?
 	}
 	public void close(){
 		try{

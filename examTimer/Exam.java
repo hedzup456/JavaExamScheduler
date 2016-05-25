@@ -44,6 +44,7 @@ public class Exam implements Comparable<Exam>{
 	
 		return comparedResult;
 	}
+
 	private Date date;
 	private String location;
 	private String subject;
