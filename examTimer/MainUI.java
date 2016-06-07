@@ -8,7 +8,9 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.Box;
@@ -63,18 +65,31 @@ public class MainUI {
 	 */
 	private void updateOtherExamsTableContents(List<Exam> allExams){
 		ArrayList<String[]> newContents = new ArrayList<String[]>(allExams.size());
-				
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		System.out.println(sdf.format(new Date()));
 		for( Exam exam: allExams){
-			long secs = exam.getTimeTilExam();
-			long[] times = {secs, secs/60, secs/60/60, secs/60/60/24};
+			exam.updateTimeTilExam();
+			long secs = exam.getTimeTilExam()/1000;	// Returns in millis
+			
+			long[] times = {secs, secs/60, (secs/60)/60, ((secs/60)/60)/24};	// Secs, mins, hours, days respectively.
+			// Time corrections - current values in times is absolute, not cumulative
+			times[0] %= 60;	// Correct sec
+			times[1] %= 60;	// Minutes
+			times[2] %= 24;	// hour
+			times[3] %= times[2]*24;	// Days
+			
 			String[] timesS = new String[4];
 			for (int i = 0; i < times.length; i++) timesS[i] = String.valueOf(times[i]);
 			
+			
+			System.out.println(exam.getSubject() + " " + sdf.format(exam.getDate()));
 			String[] newExam = {exam.getSubject() + ", " + exam.getLevelAsString(), exam.getLocation(), timesS[0], timesS[1], timesS[2], timesS[3]};
 			newContents.add(newExam);
 		}		
 		tableContents = newContents.toArray(new String[0][0]);
 	}
+	
 	private void updateTable(){
 		DefaultTableModel tableModel = (DefaultTableModel) otherExamsTable.getModel();
 		tableModel.setRowCount(0);	// Clears old values.
@@ -130,7 +145,7 @@ public class MainUI {
 				{"BLANK", "FOR", "TESTING", "Time", "Time 2"},
 			},
 			new String[] {
-				"Subject:", "Location:", "Days remaining:", "Hours remaining:", "Mins remaining:", "Seconds remaining" 
+				"Subject:", "Location:", "Seconds remaining:", "Minutes remaining:", "Hours remaining:", "Days remaining:" 
 			}
 		) {
 			Class[] columnTypes = new Class[] {
