@@ -148,6 +148,10 @@ public class Exam implements Comparable<Exam>{
 	public int getLevel(){
 		return level;
 	}
+	/** 
+	 * 
+	 * @return The level as a string, GCSE, AS, etc
+	 */
 	public String getLevelAsString(){
 		switch (level){
 		case 1: return "GCSE";
