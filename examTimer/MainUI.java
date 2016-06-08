@@ -23,7 +23,7 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.Timer;
 /**
  * @author 		Richard Henry (richardhenry602@gmail.com)
  * @since 		31 May 2016
@@ -174,6 +174,15 @@ public class MainUI {
 		// Testing array for table
 		tableContents = new String[0][0];
 		
+		Timer timer = new Timer(1000, new ActionListener() {
+		
+		        @Override
+			public void actionPerformed(ActionEvent arg0) {
+				refresh(allExams);
+			}
+		});
+		timer.start(); 
+
 		frmExamsComingUp = new JFrame();
 		frmExamsComingUp.setResizable(false);
 		frmExamsComingUp.setTitle("Exams coming up");
@@ -213,7 +222,7 @@ public class MainUI {
 		otherExamsTable = new JTable();
 		otherExamsTable.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"BLANK", "FOR", "TESTING", "Time", "Time 2"},
+				{},
 			},
 			new String[] {
 				"Subject:", "Location:", "Seconds remaining:", "Minutes remaining:", "Hours remaining:", "Days remaining:" 
