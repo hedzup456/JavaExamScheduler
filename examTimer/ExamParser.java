@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.text.SimpleDateFormat;
@@ -93,6 +94,7 @@ public class ExamParser {
 		while ( !(readExam = readExam()).getSubject().equalsIgnoreCase("ERROR")){
 			allExams.add(readExam);
 		}
+		Collections.sort(allExams);	// Return them sorted
 		return allExams;
 	}
 }
